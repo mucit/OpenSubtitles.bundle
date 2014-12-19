@@ -66,7 +66,7 @@ def fetchSubtitles(proxy, token, part, imdbID=''):
             subData = subData.decode("UTF-8")
           except:
             subData = subData.decode("ISO-8859-9")
-          subData = subData.encode("UTF-8")        
+          subData = subData.encode("UTF-8")
         part.subtitles[Locale.Language.Match(st['SubLanguageID'])][subUrl] = Proxy.Media(subData, ext=st['SubFormat'])
     else:
       Log('No subtitles available for language ' + l)
