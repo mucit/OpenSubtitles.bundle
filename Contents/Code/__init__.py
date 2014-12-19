@@ -59,6 +59,8 @@ def fetchSubtitles(proxy, token, part, imdbID=''):
       st = sorted(subtitleResponse, key=lambda k: int(k['SubDownloadsCnt']), reverse=True)[0] #most downloaded subtitle file for current language
       if st['SubFormat'] in subtitleExt:
         subUrl = st['SubDownloadLink']
+        subUrlElements = subUrl.rsplit('/',1)
+        subFilename = subUrlElements[0]
         subGz = HTTP.Request(subUrl, headers={'Accept-Encoding':'gzip'}).content
         subData = Archive.GzipDecompress(subGz)
         if l == "tur":
@@ -67,7 +69,7 @@ def fetchSubtitles(proxy, token, part, imdbID=''):
           except:
             subData = subData.decode("ISO-8859-9")
           subData = subData.encode("UTF-8")
-        part.subtitles[Locale.Language.Match(st['SubLanguageID'])][subUrl] = Proxy.Media(subData, ext=st['SubFormat'])
+        part.subtitles[Locale.Language.Match(st['SubLanguageID'])][subFilename] = Proxy.Media(subData, ext=st['SubFormat'])
     else:
       Log('No subtitles available for language ' + l)
   
