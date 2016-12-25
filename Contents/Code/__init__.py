@@ -1,4 +1,4 @@
-#opensubtitles.org
+#opensubtitles.org-anadolu
 #Subtitles service allowed by www.OpenSubtitles.org
 
 OS_API = 'http://plexapp.api.opensubtitles.org/xml-rpc'
